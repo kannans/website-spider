@@ -5,74 +5,74 @@ class Home extends Component {
     endpoint: PropTypes.string.isRequired
   };
   state = {
-    name: "",
-    email: "",
-    message: ""
+    web_url: "",
+    depth: "",
+    images: [],
+    urls: []
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { name, email, message } = this.state;
-    const lead = { name, email, message };
+    const { web_url, depth } = this.state;
+    const lead = { web_url, depth };
     const conf = {
-      method: "post",
-      body: JSON.stringify(lead),
-      headers: new Headers({ "Content-Type": "application/json" })
+      method: "get",
     };
-    fetch(this.props.endpoint, conf).then(response => console.log(response));
+    fetch('/api/grabit?url=' + web_url + '&depth=' + depth, conf).then(response => {
+      if (response.status !== 200) {
+        return this.setState({ placeholder: "Something went wrong" });
+      }
+      return response.json();
+    })
+    .then(data => this.setState({ images: data.images, urls: data.page_urls }));
   };
   render() {
-    const { name, email, message } = this.state;
+    const { web_url, depth } = this.state;
     return (
-      <div className="column">
-        <form onSubmit={this.handleSubmit}>
-          <div className="field">
-            <label className="label">Name</label>
+      <div className="offset-sm-2 col-sm-10">
+        <form   onSubmit={this.handleSubmit}>
+          <div class="form-group">
+            <label for="web_url">Web URL: </label>
             <div className="control">
               <input
-                className="input"
+                className="form-control"
                 type="text"
-                name="name"
+                name="web_url"
                 onChange={this.handleChange}
-                value={name}
+                value={web_url}
                 required
               />
             </div>
           </div>
-          <div className="field">
-            <label className="label">Email</label>
+          {/* <div className="form-group">
+            <label for="depth">Depth Nodes: </label>
             <div className="control">
               <input
-                className="input"
-                type="email"
-                name="email"
-                onChange={this.handleChange}
-                value={email}
-                required
-              />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Message</label>
-            <div className="control">
-              <textarea
-                className="textarea"
+                className="form-control"
                 type="text"
-                name="message"
+                name="depth"
                 onChange={this.handleChange}
-                value={message}
-                required
+                value={depth}
               />
             </div>
-          </div>
-          <div className="control">
-            <button type="submit" className="button is-info">
-              Send message
-            </button>
-          </div>
+          </div> */}
+          <button type="submit" class="btn btn-primary">Get Images</button>
         </form>
+
+        <hr />
+        <div class="row">
+          <ul class="hide-bullets">
+            {this.state.images.map(el => (
+              <li className="col-sm-3" key={el}>
+                <a className="thumbnail">
+                  <img src={el} alt={el} className="img-thumbnail"/>;
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
