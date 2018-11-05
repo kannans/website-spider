@@ -67,7 +67,7 @@ class Home extends Component {
             {this.state.images.map(el => (
               <li className="col-sm-3" key={el}>
                 <a className="thumbnail">
-                  <img src={el} alt={el} className="img-thumbnail"/>;
+                  <img src={el} alt={el} className="img-thumbnail"/>
                 </a>
               </li>
             ))}
