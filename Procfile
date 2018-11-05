@@ -1,1 +1,1 @@
-web: gunicorn web_crawler.wsgi
+web: gunicorn web_spider.wsgi
