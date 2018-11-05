@@ -34,7 +34,7 @@ class Home extends Component {
       <div className="offset-sm-2 col-sm-10">
         <form   onSubmit={this.handleSubmit}>
           <div class="form-group">
-            <label for="web_url">Web URL: </label>
+            <label for="web_url">Enter website url (<i>ie. https://www.amazon.in)</i></label>
             <div className="control">
               <input
                 className="form-control"
@@ -66,7 +66,7 @@ class Home extends Component {
           <ul class="hide-bullets">
             {this.state.images.map(el => (
               <li className="col-sm-3" key={el}>
-                <a className="thumbnail">
+                <a href={el} className="thumbnail" target="_blank" download>
                   <img src={el} alt={el} className="img-thumbnail"/>
                 </a>
               </li>
