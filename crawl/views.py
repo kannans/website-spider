@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
+
 import requests
 import json
 from bs4 import BeautifulSoup
@@ -37,5 +40,16 @@ def get_links(html_code):
     urls = []
     for link in html_code.findAll('a'):
         hrefs = link.get('href')
-        urls.append(hrefs)
+        if url_validator(hrefs):
+            urls.append(hrefs)
     return urls
+
+def url_validator(urlString):
+    if(urlString):
+        try:
+            validate = URLValidator(schemes=('http', 'https', 'ftp', 'ftps', 'rtsp', 'rtmp'))
+            validate(urlString)
+            return True
+        except ValidationError:
+            print('Not a valid URL')
+            return False
