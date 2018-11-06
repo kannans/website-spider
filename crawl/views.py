@@ -38,7 +38,7 @@ def get_images(html_code):
     images = []
     for link in html_code.findAll('img'):
         image_url = link.get('src')
-         if url_validator(image_url):
+        if url_validator(image_url):
             images.append(image_url)
     return images
 
