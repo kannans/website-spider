@@ -29,6 +29,7 @@ def web(page, WebUrl, depth):
             'images': get_images(beautiful_soup)
         }
         return data
+
 def get_images(html_code):
     images = []
     for link in html_code.findAll('img'):
