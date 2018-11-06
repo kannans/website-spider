@@ -58,7 +58,7 @@ class Home extends Component {
               />
             </div>
           </div> */}
-          <button type="submit" class="btn btn-primary">Get Images</button>
+          <button type="submit" class="btn btn-primary">Get Data</button>
         </form>
 
         <hr />
@@ -68,6 +68,19 @@ class Home extends Component {
               <li className="col-sm-3" key={el}>
                 <a href={el} className="thumbnail" target="_blank" download>
                   <img src={el} alt={el} className="img-thumbnail"/>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <hr />
+        <div class="row">
+          <ul class="hide-bullets">
+            {this.state.urls.map(el => (
+              <li className="col-sm-3" key={el}>
+                <a href={el} className="thumbnail" target="_blank" download>
+                  {el}
                 </a>
               </li>
             ))}
