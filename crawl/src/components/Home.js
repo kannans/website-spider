@@ -21,8 +21,13 @@ class Home extends Component {
     this.handleSubmit(e);
   };
 
+  resetData() {
+    this.setState({ images: [], urls: [] })
+  }
+
   handleSubmit = e => {
     e.preventDefault();
+    this.resetData();
     const { web_url, depth } = this.state;
     const lead = { web_url, depth };
     const conf = {
