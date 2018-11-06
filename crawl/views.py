@@ -13,7 +13,11 @@ def index(request):
 def grabit(request):
     url = request.GET['url']
     depth = request.GET['depth']
-    data = web(1, url, depth)
+    if url_validator(url):
+        data = web(1, url, depth)
+    else:
+        data = { 'page_urls': [], 'images': [] }
+
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type='application/json')
 
