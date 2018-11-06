@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import ModalImage from 'react-modal-image'
+
 class Home extends Component {
   static propTypes = {
     endpoint: PropTypes.string.isRequired
@@ -79,9 +81,11 @@ class Home extends Component {
           <ul className="hide-bullets">
             {this.state.images.map(el => (
               <li className="col-sm-3" key={el}>
-                <a href={el} className="thumbnail" target="_blank" download>
-                  <img src={el} alt={el} className="img-thumbnail"/>
-                </a>
+                <ModalImage
+                  small={el}
+                  large={el}
+                  alt={el}
+                />
               </li>
             ))}
           </ul>
