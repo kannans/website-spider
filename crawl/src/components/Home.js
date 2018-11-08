@@ -61,8 +61,8 @@ class Home extends Component {
               />
             </div>
           </div>
-          {/* <div className="form-group">
-            <label for="depth">Depth Nodes: </label>
+          <div className="form-group">
+            <label for="depth">Depth Node: (<i>ie. css selector - optional</i>) </label>
             <div className="control">
               <input
                 className="form-control"
@@ -72,7 +72,7 @@ class Home extends Component {
                 value={depth}
               />
             </div>
-          </div> */}
+          </div>
           <button type="submit" className="btn btn-primary">Get Data</button>
         </form>
 

@@ -29,22 +29,24 @@ def web(page, WebUrl, depth):
         beautiful_soup = BeautifulSoup(plain, "html.parser")
 
         data = {
-            'page_urls': get_links(beautiful_soup),
-            'images': get_images(beautiful_soup)
+            'page_urls': get_links(beautiful_soup, depth),
+            'images': get_images(beautiful_soup, depth)
         }
         return data
 
-def get_images(html_code):
+def get_images(html_code, depth):
     images = []
-    for link in html_code.findAll('img'):
+    image_node = depth + " img"
+    for link in html_code.select(image_node):
         image_url = link.get('src')
         if url_validator(image_url):
             images.append(image_url)
     return images
 
-def get_links(html_code):
+def get_links(html_code, depth):
     urls = []
-    for link in html_code.findAll('a'):
+    link_node = depth + " a"
+    for link in html_code.select(link_node):
         hrefs = link.get('href')
         if url_validator(hrefs):
             urls.append(hrefs)
